@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Got lunch?</title>
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+
+
+
+</head>
+<body>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-7"></div>
+		<div class="col-md-3" id="login-username">Tharaka</div>
+		<div class="col-md-2" id="login-userphoto">Photo</div>
+	</div>
+	<div id="content-area"></div>
+
+	<div id="footer"></div>
+</div>
+
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyCgXjmt_ooWo1avgW6lJYkqzHgK6Ad5G_E",
+	    authDomain: "lunch-timer.firebaseapp.com",
+	    databaseURL: "https://lunch-timer.firebaseio.com",
+	    projectId: "lunch-timer",
+	    storageBucket: "",
+	    messagingSenderId: "49238298955"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="js/main.js"></script>
+
+	<script type="text/javascript">
+		$("document").ready(function() {
+			var auth = new firebase.auth.GoogleAuthProvider();
+
+			firebase.auth().onAuthStateChanged(function(user) {
+				if(user != null) {
+					populateUser(user);
+				} else {
+					firebase.auth().signInWithRedirect(auth);
+				}
+			});
+
+			firebase.auth().getRedirectResult();
+		});
+	</script>
+
+</body>
+</html>
